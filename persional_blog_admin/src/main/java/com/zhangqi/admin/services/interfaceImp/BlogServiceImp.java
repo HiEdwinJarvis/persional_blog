@@ -29,7 +29,8 @@ public class BlogServiceImp implements BlogService {
     }
 
     public void deleteBlog(Integer key) {
-         pbInfoMapper.deleteByPrimaryKey(key);
+         int flag = pbInfoMapper.deleteByPrimaryKey(key);
+
     }
 
     public ArrayList<PbCategory> selectAllCategory() {

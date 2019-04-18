@@ -42,13 +42,14 @@ public String golist(){
      return "blog_form";
  }
  @RequestMapping("delete.do")
-    public String delete(String key){
-     System.out.println(key);
-     Integer key1 = Integer.valueOf(key);
-     System.out.println(key);
+    public String delete(Integer pbInfokey){
+     System.out.println(pbInfokey);
+
+     System.out.println(pbInfokey);
      System.out.println(66666);
-     blogService.deleteBlog(key1);
-     return "blog_form";
+     blogService.deleteBlog(pbInfokey);
+
+     return "bloglist";
  }
  @RequestMapping("add.do")
     public String add(@ModelAttribute PbInfo pbInfo, String pbCategorynum, Model model, RedirectAttributes redirectAttributes){
@@ -60,7 +61,7 @@ public String golist(){
      BaseResult baseResult = blogService.save(pbInfo);
      if (baseResult.getStatus() == 200) {
          redirectAttributes.addFlashAttribute("baseResult", baseResult);
-         return "redirect:/blog/bloglist";
+         return "redirect:/blog/golist.do";
      }
 
      // 保存失败
@@ -78,23 +79,26 @@ public String golist(){
   return "blog_form2";
  }
  @RequestMapping("find.do")
-    public String find(String pbInfokey,Model model){
-     Integer pbk = Integer.valueOf(pbInfokey);
+    public String find(Integer pbInfokey,Model model){
+     Integer pbk = pbInfokey;
      System.out.println(pbk+"*****");
   System.out.println(pbInfokey+" ==========<");
      PbInfo pbInfo = blogService.selectBykey(pbk);
      ArrayList<PbCategory> categoryList = blogService.selectAllCategory();
      model.addAttribute("categoryList",categoryList);
-     model.addAttribute("pbInfot",pbInfo);
+     model.addAttribute("pbInfo",pbInfo);
      System.out.println("hello ck");
-     System.out.println(pbInfo.getPbInfotitle());
-     System.out.println(pbInfo.getPbInfobody());
+
      return "blog_form2";
  }
  @RequestMapping("update.do")
     public String update(@ModelAttribute PbInfo pbInfo,String pbCategorynum,Model model){
      Integer categourId = Integer.valueOf(pbCategorynum);
      pbInfo.setPbCategoryid(categourId);
+     System.out.println("=============");
+     System.out.println(pbInfo.toString());
+     System.out.println(pbInfo.getPbCategoryid());
+
 
      int flag = blogService.update(pbInfo);
      if(flag==200){

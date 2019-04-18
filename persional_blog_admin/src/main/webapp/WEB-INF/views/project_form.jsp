@@ -17,21 +17,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/assets/plugins/dropzone/min/basic.min.css" />
     <script src="${pageContext.request.contextPath}/static/assets/plugins/dropzone/min/dropzone.min.js"></script>
     <script src = "${pageContext.request.contextPath}/static/jquery-3.3.1/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $.get("${pageContext.request.contextPath}/ProjectTech/techlist.do",
-                function (data) {
-                console.log(data);
-                         alert("dd");
-                        alert(data[0].pbProjecttechnoname);
 
-                    },
-                    "json")
-        })
-
-    </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" onload="initData()">
+
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <jsp:include page="../includes/nav.jsp" />
     <jsp:include page="../includes/menu.jsp" />
@@ -54,7 +43,7 @@
         <!--在需要使用编辑器的地方插入textarea标签 -->
 
 
-        <form:form id="inputForm" cssClass="form-horizontal" action="${pageContext.request.contextPath}/blog/add.do" method="post" >
+        <form:form id="inputForm" cssClass="form-horizontal" action="${pageContext.request.contextPath}/project/add.do" method="post" >
             <div class="alert alert-danger alert-dismissible" ${baseResult == null ? "style='display:none;'" : ""}>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     ${baseResult.message}
@@ -67,13 +56,13 @@
                 <%--多选--%>
                 <div class="box-body">
                    项目名称
-                    <input class="form-control input-lg" type="text" placeholder=".input-lg">
+                    <input class="form-control input-lg" type="text" placeholder="项目名称" name="pbProjectname">
                     <br>
 
 
                     <div class="box box-success">
                         <div class="box-header">
-                            <h3 class="box-title">iCheck - Checkbox &amp; Radio Inputs</h3>
+                            <h3 class="box-title">项目用那些技术点</h3>
                         </div>
                         <div class="box-body">
                             <!-- Minimal style -->
@@ -82,16 +71,12 @@
 
 
                             <!-- radio -->
+                            <!-- checkbox -->
                             <div class="form-group">
-                                <label>
-                                    <input type="radio" name="r3" class="flat-red" checked>技术1
+
+                                <label class="radiolist">
                                 </label>
-                                <label>
-                                    <input type="radio" name="r3" class="flat-red">技术2
-                                </label>
-                                <label>
-                                    <input type="radio" name="r3" class="flat-red" disabled>技术3
-                                </label>
+
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -99,15 +84,16 @@
                             Many more skins available. <a href="http://fronteed.com/iCheck/">Documentation</a>
                         </div>
                     </div>
-
+                    <input id="picName" class="form-control input-lg" type="text" name="pbProjectpric">
+                    <br>
                     <div id="dropz" class="dropzone"></div>
                     <h3>项目描述</h3>
-                    <textarea name="pbInfobody" id="description"/></textarea>
+                    <textarea name="pbProjectdesc" id="description"/></textarea>
                 </div>
                 <!-- /.box-body -->
             </div>
 
-
+            <input type="submit" value="提交">
 
         </form:form>
         <!--将相应的控件替换成编辑器代码 -->
@@ -137,31 +123,36 @@
         paramName: "dropzFile", // 传到后台的参数名称
         init: function () {
             this.on("success", function (file, data) {
+                alert(data.fileName);
                 // 上传成功触发的事件
+                //document.getElementById(picName).innerText= data.fileName;
+                $("#picName").attr('value', data.fileName);
             });
         }
     });
 
-    $(function(){
-        $("#button1").click(function(){
-            $.get(
-                "${pageContext.request.contextPath}/category/queryCouponState.do",
-
-                function (data) {
-
-                    alert(data[0].pbCategoryname)
 
 
-                },
-                'json'
 
-            )
+</script>
+<script>
+
+    $(document).ready(function(){
+        $.get("${pageContext.request.contextPath}/ProjectTech/techlist.do",
+            function (data) {
+
+                var item;
+                $.each(data, function(i, result) {
 
 
-        })
+                    item = "<laber><input type=\"checkbox\" class=\"flat-red\" name='arr' value="+result.pbProjecttechnoid+" >"+result.pbProjecttechnoname+"</laber>"
+                    ;
+                    $('.radiolist').append(item);
+                });
 
+            },
+            "json")
     })
-
 </script>
 
 <jsp:include page="../includes/footer.jsp" />

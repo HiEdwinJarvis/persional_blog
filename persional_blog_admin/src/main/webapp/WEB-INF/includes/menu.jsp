@@ -38,7 +38,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/project/projectList.do"><i class="fa fa-circle-o"></i> 项目列表</a></li>
+                    <li><a href="${pageContext.request.contextPath}/project/goprojectList.do"><i class="fa fa-circle-o"></i> 项目列表</a></li>
                     <li><a href="${pageContext.request.contextPath}/project/projectForm.do"><i class="fa fa-circle-o"></i> 添加项目</a></li>
                 </ul>
             </li>

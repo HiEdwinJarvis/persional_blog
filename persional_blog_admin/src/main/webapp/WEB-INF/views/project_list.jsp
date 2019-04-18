@@ -8,6 +8,7 @@
 <html>
 <head>
     <title>我的博客 | 项目管理</title>
+    <script src = "${pageContext.request.contextPath}/static/jquery-3.3.1/jquery-3.3.1.min.js"></script>
     <jsp:include page="../includes/header.jsp"/>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -61,7 +62,7 @@
                             <table id="dataTable" class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th><input type="checkbox" class="minimal icheck_master"/></th>
+
                                     <th>ID</th>
                                     <th>博客名</th>
                                     <th>内容</th>
@@ -74,25 +75,8 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     ${message}
                                 </div>
-                                <tbody>
-                                <c:forEach items="${pbprojectlist}" var="project">
-                                    <a href="${pageContext.request.contextPath}/blog/form.do">
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>${project.pbProjectdesc}</td>
+                                <tbody class="tbody">
 
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/blog/delete.do?key=${blog.pbCategoryid}"
-                                               type="button" class="btn btn-sm btn-default"><i
-                                                    class="fa fa-download"></i> 删除</a></td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/blog/find.do?pbInfokey=${blog.pbInfoid}"
-                                               type="button" class="btn btn-sm btn-default"><i
-                                                    class="fa fa-download"></i> 修改</a></td>
-
-                                    </tr>
-                                    </a>
-                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -115,48 +99,28 @@
 <sys:modal/>
 
 <script>
-    var _dataTable;
+    $(document).ready(function(){
 
-    $(function () {
-        var _columns = [
-            {
-                "data": function (row, type, val, meta) {
-                    return '<input id="' + row.id + '" type="checkbox" class="minimal" />';
-                }
+        $.get("${pageContext.request.contextPath}/project/selectPJlist.do",
+            function (data) {
+
+                var item;
+                $.each(data, function(i, result) {
+                    item = "<tr><td>" + result['pbProjectid'] + "</td>" +
+                        "<td>" + result['pbProjectname'] + "</td>" +
+                        "<td>" + result['pbProjectdesc'] + "</td>" +
+                        "<td><a href=\"${pageContext.request.contextPath}/project/find.do?pbInfokey="+result['pbInfoid']+"\" type=\"button\" class=\"btn btn-sm btn-primary\"><i class=\"fa fa-edit\"></i> 编辑</a>&nbsp</td>" +
+                        "<td><a href=\"${pageContext.request.contextPath}/project/delete.do?pbInfokey="+result['pbInfoid']+"\" type=\"button\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-edit\"></i> 编辑</a>&nbsp; </td>" +
+
+                        "</tr>";
+                    $('.tbody').append(item);
+                });
+
             },
-            {"data": "id"},
-            {"data": "username"},
-            {"data": "phone"},
-            {"data": "email"},
-            {"data": "updated"},
-            {
-                "data": function (row, type, val, meta) {
-                    var detailUrl = "/user/detail?id=" + row.id;
-                    var deleteUrl = "/user/delete";
-                    return '<button type="button" class="btn btn-sm btn-default" onclick="App.showDetail(\'' + detailUrl + '\');"><i class="fa fa-search"></i> 查看</button>&nbsp;&nbsp;&nbsp;' +
-                        '<a href="/user/form?id=' + row.id + '" type="button" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;&nbsp;' +
-                        '<button type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle(\'' + deleteUrl + '\', \'' + row.id + '\')"><i class="fa fa-trash-o"></i> 删除</button>';
-                }
-            }
-        ];
+            "json")
+    })
 
-        _dataTable = App.initDataTables("/user/page", _columns);
-    });
 
-    function search() {
-        var username = $("#username").val();
-        var phone = $("#phone").val();
-        var email = $("#email").val();
-
-        var param = {
-            "username": username,
-            "phone": phone,
-            "email": email
-        };
-
-        _dataTable.settings()[0].ajax.data = param;
-        _dataTable.ajax.reload();
-    }
 </script>
 </body>
 </html>

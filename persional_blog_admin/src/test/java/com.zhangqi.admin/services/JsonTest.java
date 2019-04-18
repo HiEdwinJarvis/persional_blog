@@ -1,7 +1,9 @@
 package com.zhangqi.admin.services;
 
 
+import com.zhangqi.admin.dao.PbProjectMapper;
 import com.zhangqi.commons.util.JSONArray;
+import com.zhangqi.domain.po.PbInfo;
 import com.zhangqi.domain.po.PbProject;
 import com.zhangqi.domain.po.PbProjectTechno;
 import org.junit.Test;
@@ -35,5 +37,30 @@ ProjectTechService projectTechService;
     }
     System.out.println(JSONArray.listToJson(list));
 }
+@Autowired
+BlogService blogService;
+
+    @Test
+    public void find() {
+
+
+        PbInfo pbInfo = blogService.selectBykey(3);
+
+        System.out.println(JSONArray.beanToJson(pbInfo));
+    }
+
+    @Autowired
+    PbProjectMapper pbProjectMapper;
+
+    @Test
+    public void addproject() {
+        PbProject pbProject = new PbProject();
+        pbProject.setPbProjectname("test");
+        pbProject.setPbOnecategoryid(2);
+        pbProject.setPbProjectdesc("test hello");
+        pbProject.setPbProjectpric("sdfsfsdfs");
+        System.out.println(pbProjectMapper.insert(pbProject));
+
+    }
 
 }

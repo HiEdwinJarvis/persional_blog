@@ -104,7 +104,7 @@
 <sys:modal/>
 
 <script>
-    var _dataTable;
+
 
     $(document).ready(function(){
         $.get("${pageContext.request.contextPath}/blog/list.do",
@@ -113,6 +113,9 @@
                 $.each(data, function(i, result) {
                     item = "<tr><td>" + result['pbInfoid'] + "</td>" +
                         "<td>" + result['pbInfotitle'] + "</td>" +
+                        "<td>...</td>" +
+                        "<td><a href=\"${pageContext.request.contextPath}/blog/find.do?pbInfokey="+result['pbInfoid']+"\" type=\"button\" class=\"btn btn-sm btn-primary\"><i class=\"fa fa-edit\"></i> 编辑</a>&nbsp</td>" +
+                        "<td><a href=\"${pageContext.request.contextPath}/blog/delete.do?pbInfokey="+result['pbInfoid']+"\" type=\"button\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-edit\"></i> 编辑</a>&nbsp; </td>" +
 
                      "</tr>";
                     $('.table').append(item);

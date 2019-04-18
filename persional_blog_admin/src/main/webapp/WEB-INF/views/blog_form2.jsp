@@ -35,9 +35,9 @@
         </section>
         <!--在需要使用编辑器的地方插入textarea标签 -->
 
-        <h2>ddd${pbInfot.pbInfotitle}</h2>
+
         <form:form id="inputForm" cssClass="form-horizontal" action="${pageContext.request.contextPath}/blog/update.do" method="post" >
-            <input type="hidden" value="${pbInfot.pbInfoid}" name="pbInfoid">
+            <input type="hidden" value="${pbInfo.pbInfoid}" name="pbInfoid">
 
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="pbCategorynum">
@@ -53,9 +53,9 @@
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" id="edid_title" name ="pbInfotitle" class="form-control" value="${pbInfot.pbInfotitle}" placeholder="Enter ...">
+                <input type="text" id="edid_title" name ="pbInfotitle" class="form-control" value="${pbInfo.pbInfotitle}" placeholder="Enter ...">
             </div>
-            <textarea name="pbInfobody" id="description"/> <c:out value="${pbInfot.pbInfobody}" escapeXml="false"/></textarea>
+            <textarea name="pbInfobody" id="description"/> <c:out value="${pbInfo.pbInfobody}" escapeXml="false"/></textarea>
             <input type="submit"/>
         </form:form>
         <!--将相应的控件替换成编辑器代码 -->

@@ -3,6 +3,7 @@ package com.zhangqi.admin.services.interfaceImp;
 import com.zhangqi.admin.dao.PbProjectMapper;
 import com.zhangqi.admin.services.ProjectService;
 import com.zhangqi.commons.dto.BaseResult;
+import com.zhangqi.commons.validator.BeanValidator;
 import com.zhangqi.domain.po.PbInfo;
 import com.zhangqi.domain.po.PbProject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,20 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     public BaseResult save(PbProject project) {
-        return null;
+
+        String validator = BeanValidator.validator(project);
+        if (validator != null) {
+            return BaseResult.fail(validator);
+        }
+
+        // 验证通过
+        else {
+            pbProjectMapper.insert(project);
+            // 新增
+
+
+            return BaseResult.success("保存内容信息成功");
+        }
     }
 
     public PbInfo selectBykey(Integer projectKey) {

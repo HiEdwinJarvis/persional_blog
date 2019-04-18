@@ -12,25 +12,7 @@
     <script src="${pageContext.request.contextPath}/static/ckeditor/ckeditor.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script type="text/javascript">
-        var xhr;
-        function ajaxDemo(){
-            xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = callback();
-            xhr.open("GET","${pageContext.request.contextPath}/category/queryCouponState.do");
-            xhr.send();
-        }
-        function callback() {
-            if(xhr.readyState==4){
-                if(xhr.status ==200){
-                    document.getElementById("result").innerHTML=xhr.responseText;
-                }
-            }
 
-        }
-
-
-    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" onload=loadXMLDoc("${pageContext.request.contextPath}/category/queryCouponState.do")>
 <div class="wrapper">
@@ -63,11 +45,9 @@
             </div>
 
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="pbCategorynum" onclick="select()">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="pbCategorynum" class="option">
                     <option selected>Choose...</option>
-                    <c:forEach items="${categoryList}" var="category">
-                    <option value="${category.pbCategoryid}" >${category.pbCategoryname}</option>
-                    </c:forEach>
+
                 </select>
 
 
@@ -102,5 +82,26 @@
 </div>
 
 <jsp:include page="../includes/footer.jsp" />
+
+<script>
+    $(document).ready(function(){
+        $.get("${pageContext.request.contextPath}/category/queryCouponState.do",
+            function (data) {
+
+
+                var item;
+                $.each(data, function(i, result) {
+
+                    item = "<option value="+result.pbCategoryid+">"+result.pbCategoryname+"</option>+"
+                    ;
+                    $('#inlineFormCustomSelectPref').append(item);
+                });
+
+            },
+            "json")
+    })
+
+
+</script>
 </body>
 </html>
