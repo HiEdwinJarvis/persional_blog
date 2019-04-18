@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="my-shop-web-admin" />
+        <module name="persional_blog_admin" />
+        <module name="persional_blog_commons" />
+        <module name="persional_blog_domain" />
+        <module name="persional_blog_ui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="my-shop-web-admin" target="1.5" />
+      <module name="persional_blog" target="1.5" />
+      <module name="persional_blog_admin" target="8" />
+      <module name="persional_blog_commons" target="8" />
+      <module name="persional_blog_dependencies" target="1.5" />
+      <module name="persional_blog_domain" target="1.5" />
+      <module name="persional_blog_ui" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

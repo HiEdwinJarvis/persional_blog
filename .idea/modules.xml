@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/persional_blog.iml" filepath="$PROJECT_DIR$/.idea/persional_blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_admin/persional_blog_admin.iml" filepath="$PROJECT_DIR$/persional_blog_admin/persional_blog_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_commons/persional_blog_commons.iml" filepath="$PROJECT_DIR$/persional_blog_commons/persional_blog_commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_dependencies/persional_blog_dependencies.iml" filepath="$PROJECT_DIR$/persional_blog_dependencies/persional_blog_dependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_domain/persional_blog_domain.iml" filepath="$PROJECT_DIR$/persional_blog_domain/persional_blog_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_ui/persional_blog_ui.iml" filepath="$PROJECT_DIR$/persional_blog_ui/persional_blog_ui.iml" />
+    </modules>
+  </component>
+</project>

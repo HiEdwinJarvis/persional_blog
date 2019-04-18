@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangqi.admin.dao.PbToolMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangqi.domain.po.PbTool" >
+    <constructor >
+      <idArg column="Pb_toolId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_oneCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_toolName" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhangqi.domain.po.PbTool" >
+    <constructor >
+      <idArg column="Pb_toolId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_oneCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_toolName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_toolIntro" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Pb_toolId, Pb_oneCategoryID, Pb_toolName
+  </sql>
+  <sql id="Blob_Column_List" >
+    Pb_toolIntro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pb_tool
+    where Pb_toolId = #{pbToolid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pb_tool
+    where Pb_toolId = #{pbToolid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangqi.domain.po.PbTool" >
+    insert into pb_tool (Pb_toolId, Pb_oneCategoryID, Pb_toolName, 
+      Pb_toolIntro)
+    values (#{pbToolid,jdbcType=INTEGER}, #{pbOnecategoryid,jdbcType=INTEGER}, #{pbToolname,jdbcType=VARCHAR}, 
+      #{pbToolintro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangqi.domain.po.PbTool" >
+    insert into pb_tool
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbToolid != null" >
+        Pb_toolId,
+      </if>
+      <if test="pbOnecategoryid != null" >
+        Pb_oneCategoryID,
+      </if>
+      <if test="pbToolname != null" >
+        Pb_toolName,
+      </if>
+      <if test="pbToolintro != null" >
+        Pb_toolIntro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbToolid != null" >
+        #{pbToolid,jdbcType=INTEGER},
+      </if>
+      <if test="pbOnecategoryid != null" >
+        #{pbOnecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbToolname != null" >
+        #{pbToolname,jdbcType=VARCHAR},
+      </if>
+      <if test="pbToolintro != null" >
+        #{pbToolintro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangqi.domain.po.PbTool" >
+    update pb_tool
+    <set >
+      <if test="pbOnecategoryid != null" >
+        Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbToolname != null" >
+        Pb_toolName = #{pbToolname,jdbcType=VARCHAR},
+      </if>
+      <if test="pbToolintro != null" >
+        Pb_toolIntro = #{pbToolintro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Pb_toolId = #{pbToolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhangqi.domain.po.PbTool" >
+    update pb_tool
+    set Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      Pb_toolName = #{pbToolname,jdbcType=VARCHAR},
+      Pb_toolIntro = #{pbToolintro,jdbcType=LONGVARCHAR}
+    where Pb_toolId = #{pbToolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangqi.domain.po.PbTool" >
+    update pb_tool
+    set Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      Pb_toolName = #{pbToolname,jdbcType=VARCHAR}
+    where Pb_toolId = #{pbToolid,jdbcType=INTEGER}
+  </update>
+</mapper>

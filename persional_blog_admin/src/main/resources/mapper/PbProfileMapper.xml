@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangqi.admin.dao.PbProfileMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangqi.domain.po.PbProfile" >
+    <constructor >
+      <idArg column="Pb_profileId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_oneCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_profileName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_profileAge" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_profileAdd" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhangqi.domain.po.PbProfile" >
+    <constructor >
+      <idArg column="Pb_profileId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_oneCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_profileName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_profileAge" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_profileAdd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_profileInInst" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Pb_profileId, Pb_oneCategoryID, Pb_profileName, Pb_profileAge, Pb_profileAdd
+  </sql>
+  <sql id="Blob_Column_List" >
+    Pb_profileInInst
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pb_profile
+    where Pb_profileId = #{pbProfileid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pb_profile
+    where Pb_profileId = #{pbProfileid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangqi.domain.po.PbProfile" >
+    insert into pb_profile (Pb_profileId, Pb_oneCategoryID, Pb_profileName, 
+      Pb_profileAge, Pb_profileAdd, Pb_profileInInst
+      )
+    values (#{pbProfileid,jdbcType=INTEGER}, #{pbOnecategoryid,jdbcType=INTEGER}, #{pbProfilename,jdbcType=VARCHAR}, 
+      #{pbProfileage,jdbcType=INTEGER}, #{pbProfileadd,jdbcType=VARCHAR}, #{pbProfileininst,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangqi.domain.po.PbProfile" >
+    insert into pb_profile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbProfileid != null" >
+        Pb_profileId,
+      </if>
+      <if test="pbOnecategoryid != null" >
+        Pb_oneCategoryID,
+      </if>
+      <if test="pbProfilename != null" >
+        Pb_profileName,
+      </if>
+      <if test="pbProfileage != null" >
+        Pb_profileAge,
+      </if>
+      <if test="pbProfileadd != null" >
+        Pb_profileAdd,
+      </if>
+      <if test="pbProfileininst != null" >
+        Pb_profileInInst,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbProfileid != null" >
+        #{pbProfileid,jdbcType=INTEGER},
+      </if>
+      <if test="pbOnecategoryid != null" >
+        #{pbOnecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbProfilename != null" >
+        #{pbProfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProfileage != null" >
+        #{pbProfileage,jdbcType=INTEGER},
+      </if>
+      <if test="pbProfileadd != null" >
+        #{pbProfileadd,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProfileininst != null" >
+        #{pbProfileininst,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangqi.domain.po.PbProfile" >
+    update pb_profile
+    <set >
+      <if test="pbOnecategoryid != null" >
+        Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbProfilename != null" >
+        Pb_profileName = #{pbProfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProfileage != null" >
+        Pb_profileAge = #{pbProfileage,jdbcType=INTEGER},
+      </if>
+      <if test="pbProfileadd != null" >
+        Pb_profileAdd = #{pbProfileadd,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProfileininst != null" >
+        Pb_profileInInst = #{pbProfileininst,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Pb_profileId = #{pbProfileid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhangqi.domain.po.PbProfile" >
+    update pb_profile
+    set Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      Pb_profileName = #{pbProfilename,jdbcType=VARCHAR},
+      Pb_profileAge = #{pbProfileage,jdbcType=INTEGER},
+      Pb_profileAdd = #{pbProfileadd,jdbcType=VARCHAR},
+      Pb_profileInInst = #{pbProfileininst,jdbcType=LONGVARCHAR}
+    where Pb_profileId = #{pbProfileid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangqi.domain.po.PbProfile" >
+    update pb_profile
+    set Pb_oneCategoryID = #{pbOnecategoryid,jdbcType=INTEGER},
+      Pb_profileName = #{pbProfilename,jdbcType=VARCHAR},
+      Pb_profileAge = #{pbProfileage,jdbcType=INTEGER},
+      Pb_profileAdd = #{pbProfileadd,jdbcType=VARCHAR}
+    where Pb_profileId = #{pbProfileid,jdbcType=INTEGER}
+  </update>
+</mapper>

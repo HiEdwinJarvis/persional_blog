@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangqi.admin.dao.PbUserMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangqi.domain.po.PbUser" >
+    <constructor >
+      <idArg column="Pb_userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_userPasswd" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Pb_userId, Pb_username, Pb_userPasswd
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_user
+    where Pb_userId = #{pbUserid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pb_user
+    where Pb_userId = #{pbUserid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangqi.domain.po.PbUser" >
+    insert into pb_user (Pb_userId, Pb_username, Pb_userPasswd
+      )
+    values (#{pbUserid,jdbcType=INTEGER}, #{pbUsername,jdbcType=VARCHAR}, #{pbUserpasswd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangqi.domain.po.PbUser" >
+    insert into pb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbUserid != null" >
+        Pb_userId,
+      </if>
+      <if test="pbUsername != null" >
+        Pb_username,
+      </if>
+      <if test="pbUserpasswd != null" >
+        Pb_userPasswd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbUserid != null" >
+        #{pbUserid,jdbcType=INTEGER},
+      </if>
+      <if test="pbUsername != null" >
+        #{pbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="pbUserpasswd != null" >
+        #{pbUserpasswd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangqi.domain.po.PbUser" >
+    update pb_user
+    <set >
+      <if test="pbUsername != null" >
+        Pb_username = #{pbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="pbUserpasswd != null" >
+        Pb_userPasswd = #{pbUserpasswd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Pb_userId = #{pbUserid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangqi.domain.po.PbUser" >
+    update pb_user
+    set Pb_username = #{pbUsername,jdbcType=VARCHAR},
+      Pb_userPasswd = #{pbUserpasswd,jdbcType=VARCHAR}
+    where Pb_userId = #{pbUserid,jdbcType=INTEGER}
+  </update>
+<select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pb_user
+    where
+    Pb_username=#{pbUsername,jdbcType=VARCHAR}
+
+</select>
+
+</mapper>
