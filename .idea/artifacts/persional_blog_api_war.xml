@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="persional_blog_api:war">
+    <output-path>$PROJECT_DIR$/persional_blog_api/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>persional_blog_api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="persional_blog_api-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="persional_blog_api:war exploded" />
+    </root>
+  </artifact>
+</component>

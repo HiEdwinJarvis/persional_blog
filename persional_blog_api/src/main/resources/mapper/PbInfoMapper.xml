@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangqi.api.dao.PbInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangqi.domain.po.PbInfo" >
+    <constructor >
+      <idArg column="Pb_infoId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_categoryId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_infoTitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhangqi.domain.po.PbInfo" >
+    <constructor >
+      <idArg column="Pb_infoId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_categoryId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Pb_infoTitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pb_infoBody" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Pb_infoId, Pb_categoryId, Pb_infoTitle
+  </sql>
+  <sql id="Blob_Column_List" >
+    Pb_infoBody
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pb_info
+    where Pb_infoId = #{pbInfoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pb_info
+    where Pb_infoId = #{pbInfoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangqi.domain.po.PbInfo" >
+    insert into pb_info (Pb_infoId, Pb_categoryId, Pb_infoTitle, 
+      Pb_infoBody)
+    values (#{pbInfoid,jdbcType=INTEGER}, #{pbCategoryid,jdbcType=INTEGER}, #{pbInfotitle,jdbcType=VARCHAR}, 
+      #{pbInfobody,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangqi.domain.po.PbInfo" >
+    insert into pb_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbInfoid != null" >
+        Pb_infoId,
+      </if>
+      <if test="pbCategoryid != null" >
+        Pb_categoryId,
+      </if>
+      <if test="pbInfotitle != null" >
+        Pb_infoTitle,
+      </if>
+      <if test="pbInfobody != null" >
+        Pb_infoBody,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbInfoid != null" >
+        #{pbInfoid,jdbcType=INTEGER},
+      </if>
+      <if test="pbCategoryid != null" >
+        #{pbCategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbInfotitle != null" >
+        #{pbInfotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pbInfobody != null" >
+        #{pbInfobody,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangqi.domain.po.PbInfo" >
+    update pb_info
+    <set >
+      <if test="pbCategoryid != null" >
+        Pb_categoryId = #{pbCategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="pbInfotitle != null" >
+        Pb_infoTitle = #{pbInfotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pbInfobody != null" >
+        Pb_infoBody = #{pbInfobody,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Pb_infoId = #{pbInfoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhangqi.domain.po.PbInfo" >
+    update pb_info
+    set Pb_categoryId = #{pbCategoryid,jdbcType=INTEGER},
+      Pb_infoTitle = #{pbInfotitle,jdbcType=VARCHAR},
+      Pb_infoBody = #{pbInfobody,jdbcType=LONGVARCHAR}
+    where Pb_infoId = #{pbInfoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangqi.domain.po.PbInfo" >
+    update pb_info
+    set Pb_categoryId = #{pbCategoryid,jdbcType=INTEGER},
+      Pb_infoTitle = #{pbInfotitle,jdbcType=VARCHAR},
+    where Pb_infoId = #{pbInfoid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select * from pb_info
+  </select>
+</mapper>

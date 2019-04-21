@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/persional_blog.iml" filepath="$PROJECT_DIR$/.idea/persional_blog.iml" />
       <module fileurl="file://$PROJECT_DIR$/persional_blog_admin/persional_blog_admin.iml" filepath="$PROJECT_DIR$/persional_blog_admin/persional_blog_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persional_blog_api/persional_blog_api.iml" filepath="$PROJECT_DIR$/persional_blog_api/persional_blog_api.iml" />
       <module fileurl="file://$PROJECT_DIR$/persional_blog_commons/persional_blog_commons.iml" filepath="$PROJECT_DIR$/persional_blog_commons/persional_blog_commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/persional_blog_dependencies/persional_blog_dependencies.iml" filepath="$PROJECT_DIR$/persional_blog_dependencies/persional_blog_dependencies.iml" />
       <module fileurl="file://$PROJECT_DIR$/persional_blog_domain/persional_blog_domain.iml" filepath="$PROJECT_DIR$/persional_blog_domain/persional_blog_domain.iml" />

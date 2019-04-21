@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangqi.admin.dao.PbProjectTechnoMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangqi.domain.po.PbProjectTechno" >
+    <constructor >
+      <idArg column="pb_projectTechnoID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pb_projectTechnoName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pb_projectID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhangqi.domain.po.PbProjectTechno" >
+    <constructor >
+      <idArg column="pb_projectTechnoID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pb_projectTechnoName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pb_projectID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pb_projectTechnodesc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pb_projectTechnoID, pb_projectTechnoName, pb_projectID
+  </sql>
+  <sql id="Blob_Column_List" >
+    pb_projectTechnodesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pb_projecttechno
+    where pb_projectTechnoID = #{pbProjecttechnoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pb_projecttechno
+    where pb_projectTechnoID = #{pbProjecttechnoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangqi.domain.po.PbProjectTechno" >
+    insert into pb_projecttechno (pb_projectTechnoID, pb_projectTechnoName, 
+      pb_projectID, pb_projectTechnodesc)
+    values (#{pbProjecttechnoid,jdbcType=INTEGER}, #{pbProjecttechnoname,jdbcType=VARCHAR}, 
+      #{pbProjectid,jdbcType=INTEGER}, #{pbProjecttechnodesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangqi.domain.po.PbProjectTechno" >
+    insert into pb_projecttechno
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbProjecttechnoid != null" >
+        pb_projectTechnoID,
+      </if>
+      <if test="pbProjecttechnoname != null" >
+        pb_projectTechnoName,
+      </if>
+      <if test="pbProjectid != null" >
+        pb_projectID,
+      </if>
+      <if test="pbProjecttechnodesc != null" >
+        pb_projectTechnodesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbProjecttechnoid != null" >
+        #{pbProjecttechnoid,jdbcType=INTEGER},
+      </if>
+      <if test="pbProjecttechnoname != null" >
+        #{pbProjecttechnoname,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProjectid != null" >
+        #{pbProjectid,jdbcType=INTEGER},
+      </if>
+      <if test="pbProjecttechnodesc != null" >
+        #{pbProjecttechnodesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangqi.domain.po.PbProjectTechno" >
+    update pb_projecttechno
+    <set >
+      <if test="pbProjecttechnoname != null" >
+        pb_projectTechnoName = #{pbProjecttechnoname,jdbcType=VARCHAR},
+      </if>
+      <if test="pbProjectid != null" >
+        pb_projectID = #{pbProjectid,jdbcType=INTEGER},
+      </if>
+      <if test="pbProjecttechnodesc != null" >
+        pb_projectTechnodesc = #{pbProjecttechnodesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pb_projectTechnoID = #{pbProjecttechnoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhangqi.domain.po.PbProjectTechno" >
+    update pb_projecttechno
+    set pb_projectTechnoName = #{pbProjecttechnoname,jdbcType=VARCHAR},
+      pb_projectID = #{pbProjectid,jdbcType=INTEGER},
+      pb_projectTechnodesc = #{pbProjecttechnodesc,jdbcType=LONGVARCHAR}
+    where pb_projectTechnoID = #{pbProjecttechnoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangqi.domain.po.PbProjectTechno" >
+    update pb_projecttechno
+    set pb_projectTechnoName = #{pbProjecttechnoname,jdbcType=VARCHAR},
+      pb_projectID = #{pbProjectid,jdbcType=INTEGER}
+    where pb_projectTechnoID = #{pbProjecttechnoid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select * FROM pb_projectTechno
+  </select>
+</mapper>

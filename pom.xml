@@ -15,5 +15,6 @@
         <module>persional_blog_domain</module>
         <module>persional_blog_ui</module>
         <module>persional_blog_commons</module>
+        <module>persional_blog_api</module>
     </modules>
 </project>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/persional_blog_admin" />
+    <file type="web" url="file://$PROJECT_DIR$/persional_blog_api" />
     <file type="web" url="file://$PROJECT_DIR$/persional_blog_dependencies" />
     <file type="web" url="file://$PROJECT_DIR$/persional_blog_ui" />
   </component>
